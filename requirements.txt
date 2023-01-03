@@ -156,8 +156,12 @@ zipp==3.8.1
 openmim
 mmcv-full
 mmdet
+fastapi== 0.88.0
+from-root==1.0.2
 
 # -r mmocr-ocr/requirements/build.txt
 # -r mmocr-ocr/requirements/optional.txt
 # -r mmocr-ocr/requirements/runtime.txt
 # -r mmocr-ocr/requirements/tests.txt
+
+-e . 
