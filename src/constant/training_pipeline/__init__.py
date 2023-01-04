@@ -25,10 +25,13 @@ DATA_INGESTION_OBJ_DET_DIR: str = "object_detection"
 DATA_INGESTION_TEXT_DET_DIR: str = "text_detection"
 
 DATA_INGESTION_DATA_STORE_DIR: str = "dataset"
-DATA_INGESTION_ANNOT_STORE_DIR: str = "annotations"
+DATA_INGESTION_COCO_ANNOT_STORE_DIR: str = "annotations"
 
 DATA_INGESTION_TRAIN_DIR: str = "train"
 DATA_INGESTION_TEST_DIR: str = "test"
+
+DATA_INGESTION_TRAIN_COCO_ANNOT_FILE_NAME: str = "train_annotations.coco.json"
+DATA_INGESTION_TEST_COCO_ANNOT_FILE_NAME: str = "test_annotations.coco.json"
 
 
 """

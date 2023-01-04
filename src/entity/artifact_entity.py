@@ -3,8 +3,16 @@ from dataclasses import dataclass
 
 @dataclass
 class DataIngestionArtifact:
-    training_folder_path:str 
-    test_folder_path:str 
+    obj_detection_training_folder_path: str
+    obj_detection_testing_folder_path: str
+    obj_detection_coco_train_annot_path: str
+    obj_detection_coco_test_annot_path: str
+
+    text_detection_training_folder_path: str
+    text_detection_testing_folder_path: str
+    text_detection_coco_train_annot_path: str
+    text_detection_coco_test_annot_path: str
+
 
 
 @dataclass

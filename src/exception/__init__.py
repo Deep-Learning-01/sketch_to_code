@@ -11,7 +11,7 @@ def error_message_detail(error, error_detail):
     return error_message
 
 
-class FerException(Exception):
+class SketchtocodeException(Exception):
     def __init__(self, error_message, error_detail):
         """
         :param error_message: error message in string format
