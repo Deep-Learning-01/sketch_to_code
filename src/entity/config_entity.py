@@ -85,30 +85,52 @@ class DataIngestionConfig:
 
 @dataclass
 class ModelTrainerConfig:
-    model_trainer_artifact_dir: str = os.path.join(training_pipeline_config.artifact_dir, MODEL_TRAINER_ARTIFACT_DIR_NAME)
-    trained_model_file_path: str = os.path.join(model_trainer_artifact_dir, MODEL_TRAINER_TRAINED_MODEL_DIR, MODEL_TRAINER_TRAINED_MODEL_NAME)
-    trained_model_base_acc_score:float = MODEL_TRAINER_TRAINED_MODEL_BASE_ACC_SCORE
+    model_trainer_artifact_dir: str = os.path.join(training_pipeline_config.artifact_dir, 
+                                                    MODEL_TRAINER_ARTIFACT_DIR_NAME)
+    obj_detection_artifact_dir: str = os.path.join(model_trainer_artifact_dir, 
+                                                    MODEL_TRAINER_OBJ_DET_ARTIFACT_DIR_NAME)
+    text_detection_artifact_dir: str = os.path.join(model_trainer_artifact_dir,
+                                                    MODEL_TRAINER_TEXT_DET_ARTIFACT_DIR_NAME )
+    obj_detection_train_coco_ins_name: str = MODEL_TRAINER_OBJ_DET_TRAIN_COCO_INS_NAME
+    obj_detection_test_coco_ins_name: str = MODEL_TRAINER_OBJ_DET_TEST_COCO_INS_NAME
+    text_detection_train_coco_ins_name: str = MODEL_TRAINER_TEXT_DET_TRAIN_COCO_INS_DIR
+    text_detection_test_coco_ins_name: str = MODEL_TRAINER_TEXT_DET_TEST_COCO_INS_DIR
+
+    obj_detection_model_output_dir: str = os.path.join(obj_detection_artifact_dir,
+                                                        MODEL_TRAINER_TRAINED_MODEL_OUTPUT_DIR )
+    text_detection_model_output_dir: str = os.path.join(text_detection_artifact_dir,
+                                                        MODEL_TRAINER_TRAINED_MODEL_OUTPUT_DIR )
+
+    obj_detection_model_yaml_file_path:str = os.path.join(MODEL_TRAINER_OBJ_DET_MODEL_YAML_FILE_DIR_NAME,
+                                                        MODEL_TRAINER_OBJ_DET_MODEL_YAML_CONFIG_FILE_NAME)
+
+    text_detection_model_yaml_file_path: str = os.path.join(ROOT_DIR, MODEL_TRAINER_TEXT_DET_MODEL_YAML_FILE_DIR_NAME,
+                                                            MODEL_TRAINER_TEXT_DET_MODEL_YAML_CONFIG_FILE_NAME)
+
+    obj_detection_saved_model_path:str = os.path.join(obj_detection_model_output_dir,
+                                                    MODEL_TRAINER_TRAINED_MODEL_NAME ) 
+    text_detection_saved_model_path = os.path.join(text_detection_model_output_dir,
+                                                     MODEL_TRAINER_TRAINED_MODEL_NAME)
+
+# @dataclass
+# class ModelEvaluationConfig:
+#     model_eval_artifact_dir = os.path.join(training_pipeline_config.artifact_dir, MODEL_EVALUATION_DIR_NAME)
+#     s3_model_key_path: str = MODEL_EVALUATION_BEST_MODEL_NAME
+#     best_model_dir:str  = os.path.join(model_eval_artifact_dir, MODEL_EVALUATION_BEST_MODEL_DIR)
+#     best_model_path:str = os.path.join(best_model_dir, s3_model_key_path)
 
 
-@dataclass
-class ModelEvaluationConfig:
-    model_eval_artifact_dir = os.path.join(training_pipeline_config.artifact_dir, MODEL_EVALUATION_DIR_NAME)
-    s3_model_key_path: str = MODEL_EVALUATION_BEST_MODEL_NAME
-    best_model_dir:str  = os.path.join(model_eval_artifact_dir, MODEL_EVALUATION_BEST_MODEL_DIR)
-    best_model_path:str = os.path.join(best_model_dir, s3_model_key_path)
 
 
 
 
+# @dataclass
+# class PredictionPipelineConfig:
 
-
-@dataclass
-class PredictionPipelineConfig:
-
-    model_bucket_name = TRAINING_BUCKET_NAME
-    pred_artifact_dir = os.path.join(ARTIFACT_DIR ,PREDICTION_ARTIFACT_DIR,TIMESTAMP)
-    pred_file_input_dir = os.path.join(pred_artifact_dir, PRED_INPUT_FILE_DIR_NAME)
-    pred_model_dir = os.path.join(pred_artifact_dir, PREDICTION_MODEL_DIR_NAME)
-    pred_model_full_path = os.path.join(pred_model_dir, MODEL_TRAINER_TRAINED_MODEL_NAME)
+#     model_bucket_name = TRAINING_BUCKET_NAME
+#     pred_artifact_dir = os.path.join(ARTIFACT_DIR ,PREDICTION_ARTIFACT_DIR,TIMESTAMP)
+#     pred_file_input_dir = os.path.join(pred_artifact_dir, PRED_INPUT_FILE_DIR_NAME)
+#     pred_model_dir = os.path.join(pred_artifact_dir, PREDICTION_MODEL_DIR_NAME)
+#     pred_model_full_path = os.path.join(pred_model_dir, MODEL_TRAINER_TRAINED_MODEL_NAME)
 
 

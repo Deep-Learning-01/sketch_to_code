@@ -129,13 +129,13 @@ class DataIngestion:
 
 
             data_ingestion_artifact = DataIngestionArtifact(
-                obj_detection_training_folder_path= self.data_ingestion_config.obj_detection_train_data_dir,
-                obj_detection_testing_folder_path= self.data_ingestion_config.obj_detection_test_data_dir,
+                obj_detection_training_data_folder_path = self.data_ingestion_config.obj_detection_train_data_dir,
+                obj_detection_testing_data_folder_path= self.data_ingestion_config.obj_detection_test_data_dir,
                 obj_detection_coco_train_annot_path = self.data_ingestion_config.obj_detection_train_coco_annot_path,
                 obj_detection_coco_test_annot_path = self.data_ingestion_config.obj_detection_test_coco_annot_path,
 
-                text_detection_training_folder_path= self.data_ingestion_config.text_detection_train_data_dir,
-                text_detection_testing_folder_path= self.data_ingestion_config.text_detection_test_data_dir,
+                text_detection_training_data_folder_path= self.data_ingestion_config.text_detection_train_data_dir,
+                text_detection_testing_data_folder_path= self.data_ingestion_config.text_detection_test_data_dir,
                 text_detection_coco_train_annot_path = self.data_ingestion_config.text_detection_train_coco_annot_path,
                 text_detection_coco_test_annot_path= self.data_ingestion_config.text_detection_test_coco_annot_path 
 

@@ -3,13 +3,13 @@ from dataclasses import dataclass
 
 @dataclass
 class DataIngestionArtifact:
-    obj_detection_training_folder_path: str
-    obj_detection_testing_folder_path: str
+    obj_detection_training_data_folder_path: str
+    obj_detection_testing_data_folder_path: str
     obj_detection_coco_train_annot_path: str
     obj_detection_coco_test_annot_path: str
 
-    text_detection_training_folder_path: str
-    text_detection_testing_folder_path: str
+    text_detection_training_data_folder_path: str
+    text_detection_testing_data_folder_path: str
     text_detection_coco_train_annot_path: str
     text_detection_coco_test_annot_path: str
 
@@ -17,7 +17,8 @@ class DataIngestionArtifact:
 
 @dataclass
 class ModelTrainerArtifact:
-    trained_model_file_path:str 
+    obj_detection_trained_model_file_path:str 
+    text_detection_trained_model_file_path:str
 @dataclass
 class ModelEvaluationArtifact:
     is_model_accepted:bool

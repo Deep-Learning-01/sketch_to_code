@@ -112,6 +112,7 @@ pyrsistent==0.18.0
 PySocks==1.7.1
 pytesseract==0.3.10
 python-dateutil==2.8.2
+python-box
 PyYAML==6.0
 pyzmq==23.2.0
 QtPy==2.2.0
