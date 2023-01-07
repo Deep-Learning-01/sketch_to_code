@@ -5,7 +5,7 @@ from src.exception import SketchtocodeException
 
 from src.entity.artifact_entity import ModelTrainerArtifact, DataIngestionArtifact
 from src.entity.config_entity import ModelTrainerConfig
-from src.utils import get_model_config_attribute
+from src.utils import get_model_config_attribute, save_model_config_to_yaml_file
 
 import torch, torchvision
 
@@ -57,17 +57,17 @@ class ModelTrainer:
             obj_det_model_config = self.model_config.MODEL_CONFIG.OBJECT_DETECTION_MODEL.CONFIG
 
             train_coco_ins_name = self.model_trainer_config.obj_detection_train_coco_ins_name
-            # test_coco_ins_name = self.model_trainer_config.obj_detection_test_coco_ins_name
+            test_coco_ins_name = self.model_trainer_config.obj_detection_test_coco_ins_name
             
             register_coco_instances(name= train_coco_ins_name,
                                     metadata={},
                                     json_file= self.data_ingestion_artifact.obj_detection_coco_train_annot_path,
                                     image_root= self.data_ingestion_artifact.obj_detection_training_data_folder_path )
             
-            # register_coco_instances(name= test_coco_ins_name,
-            #                         metadata={},    
-            #                         json_file= self.data_ingestion_artifact.obj_detection_coco_test_annot_path,
-            #                         image_root= self.data_ingestion_artifact.obj_detection_testing_data_folder_path )
+            register_coco_instances(name= test_coco_ins_name,
+                                    metadata={},    
+                                    json_file= self.data_ingestion_artifact.obj_detection_coco_test_annot_path,
+                                    image_root= self.data_ingestion_artifact.obj_detection_testing_data_folder_path )
 
 
 
@@ -86,6 +86,11 @@ class ModelTrainer:
             config.MODEL.ROI_HEADS.NUM_CLASSES = obj_det_model_config.MODEL.ROI_HEADS.NUM_CLASSES
             config.OUTPUT_DIR = self.model_trainer_config.obj_detection_model_output_dir
 
+            config.INPUT.MAX_SIZE_TRAIN = 1333
+            config.INPUT.MIN_SIZE_TRAIN = (1280,)
+            config.MAX_SIZE_TEST: 1333
+            config.MIN_SIZE_TEST: 1280
+
             os.makedirs(config.OUTPUT_DIR, exist_ok=True)
 
             trainer = DefaultTrainer(config)
@@ -93,6 +98,9 @@ class ModelTrainer:
             trainer.train()
 
             lg.info("object detection training completed")
+
+            save_model_config_to_yaml_file(model_config= config,
+            model_config_file_path= self.model_trainer_config.obj_detection_training_config_file_path)
 
 
         except Exception as e:
@@ -119,10 +127,7 @@ class ModelTrainer:
                                     json_file= self.data_ingestion_artifact.text_detection_coco_train_annot_path,
                                     image_root= self.data_ingestion_artifact.text_detection_training_data_folder_path )
             
-            # register_coco_instances(name= test_coco_ins_name,
-            #                         metadata={},    
-            #                         json_file= self.data_ingestion_artifact.obj_detection_coco_test_annot_path,
-            #                         image_root= self.data_ingestion_artifact.obj_detection_testing_data_folder_path )
+           
 
             
 
@@ -142,6 +147,10 @@ class ModelTrainer:
             trainer.train()
 
             lg.info("Text detection training completed")
+
+            save_model_config_to_yaml_file(model_config= config,
+            model_config_file_path= self.model_trainer_config.text_detection_training_config_file_path)
+
 
         except Exception as e:
             raise SketchtocodeException(e,sys)
@@ -167,7 +176,10 @@ class ModelTrainer:
 
             model_trainer_artifact = ModelTrainerArtifact(
                 obj_detection_trained_model_file_path= self.model_trainer_config.obj_detection_saved_model_path,
-                text_detection_trained_model_file_path= self.model_trainer_config.text_detection_saved_model_path
+                text_detection_trained_model_file_path= self.model_trainer_config.text_detection_saved_model_path,
+                obj_detection_trained_model_config_file_path= self.model_trainer_config.obj_detection_training_config_file_path,
+                text_detection_trained_model_config_file_path= self.model_trainer_config.text_detection_training_config_file_path 
+
             )
 
             lg.info("Exited the model training component of the training pipeline.")
