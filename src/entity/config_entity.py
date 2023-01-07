@@ -85,12 +85,15 @@ class DataIngestionConfig:
 
 @dataclass
 class ModelTrainerConfig:
+
     model_trainer_artifact_dir: str = os.path.join(training_pipeline_config.artifact_dir, 
                                                     MODEL_TRAINER_ARTIFACT_DIR_NAME)
     obj_detection_artifact_dir: str = os.path.join(model_trainer_artifact_dir, 
                                                     MODEL_TRAINER_OBJ_DET_ARTIFACT_DIR_NAME)
     text_detection_artifact_dir: str = os.path.join(model_trainer_artifact_dir,
                                                     MODEL_TRAINER_TEXT_DET_ARTIFACT_DIR_NAME )
+
+    #COCO INSTANCE NAMES                                                
     obj_detection_train_coco_ins_name: str = MODEL_TRAINER_OBJ_DET_TRAIN_COCO_INS_NAME
     obj_detection_test_coco_ins_name: str = MODEL_TRAINER_OBJ_DET_TEST_COCO_INS_NAME
     text_detection_train_coco_ins_name: str = MODEL_TRAINER_TEXT_DET_TRAIN_COCO_INS_DIR
@@ -100,6 +103,19 @@ class ModelTrainerConfig:
                                                         MODEL_TRAINER_TRAINED_MODEL_OUTPUT_DIR )
     text_detection_model_output_dir: str = os.path.join(text_detection_artifact_dir,
                                                         MODEL_TRAINER_TRAINED_MODEL_OUTPUT_DIR )
+    # training configs
+   
+
+    obj_detection_training_config_file_path: str = os.path.join(obj_detection_artifact_dir,
+                                                                MODEL_TRAINER_TRAINED_MODEL_CONFIG_STORE_DIR,
+                                                            MODEL_TRAINER_TRAINED_MODEL_CONFIG_FILE_NAME)
+
+
+
+    text_detection_training_config_file_path: str = os.path.join(text_detection_artifact_dir,
+                                                                MODEL_TRAINER_TRAINED_MODEL_CONFIG_STORE_DIR,
+                                                            MODEL_TRAINER_TRAINED_MODEL_CONFIG_FILE_NAME)
+                                                
 
     obj_detection_model_yaml_file_path:str = os.path.join(MODEL_TRAINER_OBJ_DET_MODEL_YAML_FILE_DIR_NAME,
                                                         MODEL_TRAINER_OBJ_DET_MODEL_YAML_CONFIG_FILE_NAME)
@@ -112,12 +128,35 @@ class ModelTrainerConfig:
     text_detection_saved_model_path = os.path.join(text_detection_model_output_dir,
                                                      MODEL_TRAINER_TRAINED_MODEL_NAME)
 
-# @dataclass
-# class ModelEvaluationConfig:
-#     model_eval_artifact_dir = os.path.join(training_pipeline_config.artifact_dir, MODEL_EVALUATION_DIR_NAME)
-#     s3_model_key_path: str = MODEL_EVALUATION_BEST_MODEL_NAME
-#     best_model_dir:str  = os.path.join(model_eval_artifact_dir, MODEL_EVALUATION_BEST_MODEL_DIR)
-#     best_model_path:str = os.path.join(best_model_dir, s3_model_key_path)
+@dataclass
+class ModelEvaluationConfig:
+    model_eval_artifact_dir = os.path.join(training_pipeline_config.artifact_dir, MODEL_EVALUATION_DIR_NAME)
+    
+    #s3 configs to download model
+    s3_model_key_path: str = MODEL_EVALUATION_BEST_MODEL_NAME
+    obj_det_aws_s3_model_path: str = os.path.join( TRAINING_BUCKET_NAME ,
+                                                    MODEL_EVALUATION_S3_OBJ_DET_DIR,
+                                                    MODEL_EVALUATION_S3_SAVED_MODEL_DIR,
+                                                    s3_model_key_path )
+
+
+    text_det_aws_s3_model_path: str = os.path.join( TRAINING_BUCKET_NAME,
+                                                    MODEL_EVALUATION_S3_TEXT_DET_DIR,
+                                                    MODEL_EVALUATION_S3_SAVED_MODEL_DIR,
+                                                    s3_model_key_path )
+
+
+
+    
+
+
+    obj_detection_test_coco_ins_name: str = MODEL_TRAINER_OBJ_DET_TEST_COCO_INS_NAME
+
+    obj_det_best_model_dir: str = os.path.join(model_eval_artifact_dir, OBJ_DETECTION_FOLDER_NAME, MODEL_EVALUATION_BEST_MODEL_DIR)
+    text_det_best_model_dir: str = os.path.join(model_eval_artifact_dir, TEXT_DETECTION_FOLDER_NAME, MODEL_EVALUATION_BEST_MODEL_DIR)
+
+    obj_det_best_model_path:str = os.path.join(obj_det_best_model_dir, s3_model_key_path)
+    text_det_best_model_path:str = os.path.join(text_det_best_model_dir, s3_model_key_path)
 
 
 

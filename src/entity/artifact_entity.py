@@ -19,6 +19,8 @@ class DataIngestionArtifact:
 class ModelTrainerArtifact:
     obj_detection_trained_model_file_path:str 
     text_detection_trained_model_file_path:str
+    obj_detection_trained_model_config_file_path:str
+    text_detection_trained_model_config_file_path:str
 @dataclass
 class ModelEvaluationArtifact:
     is_model_accepted:bool
