@@ -31,7 +31,7 @@ class DataIngestion:
         
         try:
             self.s3_syncer.sync_folder_from_s3(
-            aws_file_path= self.aws_s3_config.obj_det_dataset_path,
+            aws_folder_path = self.aws_s3_config.obj_det_dataset_path,
             folder= self.data_ingestion_config.object_detection_data_store_dir
             ) 
             
@@ -54,7 +54,7 @@ class DataIngestion:
 
         try:
             self.s3_syncer.sync_folder_from_s3(
-            aws_file_path= self.aws_s3_config.text_det_dataset_path,
+            aws_folder_path = self.aws_s3_config.text_det_dataset_path,
             folder= self.data_ingestion_config.text_detection_data_store_dir
             ) 
             
@@ -76,7 +76,7 @@ class DataIngestion:
         
         try:
             self.s3_syncer.sync_folder_from_s3(
-            aws_file_path= self.aws_s3_config.obj_det_coco_annot_path,
+            aws_folder_path= self.aws_s3_config.obj_det_coco_annot_path,
             folder= self.data_ingestion_config.object_detection_coco_annot_data_store_dir
             ) 
             
@@ -99,7 +99,7 @@ class DataIngestion:
 
         try:
             self.s3_syncer.sync_folder_from_s3(
-            aws_file_path= self.aws_s3_config.text_det_coco_annot_path,
+            aws_folder_path = self.aws_s3_config.text_det_coco_annot_path,
             folder= self.data_ingestion_config.text_detection_coco_annot_data_store_dir
             ) 
             

@@ -15,7 +15,7 @@ setup_logger()
 
 # import some common libraries
 import numpy as np
-import os, json, cv2, random
+import os
 # from google.colab.patches import cv2_imshow
 
 # import some common detectron2 utilities
@@ -57,18 +57,13 @@ class ModelTrainer:
             obj_det_model_config = self.model_config.MODEL_CONFIG.OBJECT_DETECTION_MODEL.CONFIG
 
             train_coco_ins_name = self.model_trainer_config.obj_detection_train_coco_ins_name
-            test_coco_ins_name = self.model_trainer_config.obj_detection_test_coco_ins_name
             
             register_coco_instances(name= train_coco_ins_name,
                                     metadata={},
                                     json_file= self.data_ingestion_artifact.obj_detection_coco_train_annot_path,
                                     image_root= self.data_ingestion_artifact.obj_detection_training_data_folder_path )
             
-            register_coco_instances(name= test_coco_ins_name,
-                                    metadata={},    
-                                    json_file= self.data_ingestion_artifact.obj_detection_coco_test_annot_path,
-                                    image_root= self.data_ingestion_artifact.obj_detection_testing_data_folder_path )
-
+       
 
 
             config = get_cfg()
