@@ -185,6 +185,26 @@ class ModelEvaluationConfig:
 
 
 
+@dataclass
+class ModelPusherConfig:
+    training_bucket_name: str = TRAINING_BUCKET_NAME
+
+    obj_detection_s3_model_store_dir_path = os.path.join(training_bucket_name,
+                                            OBJ_DETECTION_FOLDER_NAME,
+                                            MODEL_TRAINER_TRAINED_MODEL_OUTPUT_DIR)
+
+
+
+    text_detection_s3_model_store_dir_path = os.path.join(training_bucket_name,
+                                            TEXT_DETECTION_FOLDER_NAME,
+                                            MODEL_TRAINER_TRAINED_MODEL_OUTPUT_DIR)
+
+
+
+    
+
+            
+
 
 
 # @dataclass
