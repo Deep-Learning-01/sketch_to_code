@@ -23,8 +23,9 @@ class ModelTrainerArtifact:
     text_detection_trained_model_config_file_path:str
 @dataclass
 class ModelEvaluationArtifact:
-    is_model_accepted:bool
-    trained_model_dir:str 
+    is_obj_det_model_accepted:bool
+    is_obj_text_model_accepted: bool
+    # trained_model_dir:str 
 
 
 
