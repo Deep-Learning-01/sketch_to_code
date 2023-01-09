@@ -4,6 +4,8 @@ from src.exception import SketchtocodeException
 
 from detectron2.config.config import CfgNode
 import os,sys
+import os,sys
+import subprocess
 from box import ConfigBox
 
 
@@ -30,6 +32,22 @@ def save_model_config_to_yaml_file(model_config:CfgNode, model_config_file_path:
         os.makedirs( os.path.dirname(model_config_file_path), exist_ok=True)
         with open(model_config_file_path, "w") as yaml_file:
             yaml_file.write(model_config.dump())
+    except Exception as e:
+        raise SketchtocodeException(e, sys)
+
+def is_model_present_in_s3(model_path):
+    try:
+        
+        command = f"""aws s3api list-objects-v2 --bucket {TRAINING_BUCKET_NAME} --query "contains(Contents[].Key, '{model_path}')" """
+          
+        output = subprocess.check_output(command, shell=True)
+
+        output = output.decode('utf-8').rstrip()
+
+        output = True if output=='true' else False
+
+        return output
+        
     except Exception as e:
         raise SketchtocodeException(e, sys)
 
