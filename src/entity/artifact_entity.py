@@ -24,7 +24,7 @@ class ModelTrainerArtifact:
 @dataclass
 class ModelEvaluationArtifact:
     is_obj_det_model_accepted:bool
-    is_obj_text_model_accepted: bool
+    is_text_det_model_accepted: bool
     # trained_model_dir:str 
 
 
