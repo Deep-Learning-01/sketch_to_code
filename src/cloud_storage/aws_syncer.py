@@ -3,7 +3,7 @@ import os
 
 class S3Sync:
 
-    def sync_folder_to_s3(self,folder,aws_buket_name):
+    def sync_folder_to_s3(self,folder,aws_folder_path):
         """
         Method Name :   sync_folder_to_s3
         Description :   This method syncs local folder to s3 bucket
@@ -15,7 +15,7 @@ class S3Sync:
         Revisions   :   moved setup to cloud
         """
 
-        command = f"aws s3 sync {folder} s3://{aws_buket_name} "
+        command = f"aws s3 sync {folder} s3://{aws_folder_path} "
         os.system(command)
 
     def sync_folder_from_s3(self,folder,aws_folder_path):
