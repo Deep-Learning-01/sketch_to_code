@@ -285,7 +285,7 @@ class ModelEvaluation:
             
             model_eval_artifact = ModelEvaluationArtifact(
                 is_obj_det_model_accepted= is_obj_det_model_accepted,
-                is_obj_text_model_accepted= is_text_det_model_accepted
+                is_text_det_model_accepted= is_text_det_model_accepted
             )
 
             lg.info("Model evaluation is completed.")
