@@ -1,7 +1,7 @@
-from src.components.data_ingestion import DataIngestion
-from src.components.model_training import ModelTrainer 
-from src.components.model_evaluation import ModelEvaluation
-from src.components.model_pusher import ModelPusher
+from src.training_components.data_ingestion import DataIngestion
+from src.training_components.model_training import ModelTrainer 
+from src.training_components.model_evaluation import ModelEvaluation
+from src.training_components.model_pusher import ModelPusher
 
 from src.entity.artifact_entity import (DataIngestionArtifact,
                                         ModelTrainerArtifact,
@@ -15,7 +15,7 @@ from src.entity.config_entity import (DataIngestionConfig,
                                         ModelPusherConfig)
 
 from src.exception import SketchtocodeException
-import os,sys
+import sys
 
 
 
