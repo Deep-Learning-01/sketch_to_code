@@ -21,10 +21,11 @@ class ModelEvaluation:
 
     def __init__(self,
                 data_ingestion_artifact: DataIngestionArtifact,
-                model_trainer_artifact: ModelTrainerArtifact ):
+                model_trainer_artifact: ModelTrainerArtifact,
+                model_evaluation_config: ModelEvaluationConfig ):
 
 
-        self.model_eval_config = ModelEvaluationConfig()
+        self.model_evaluation_config = model_evaluation_config
         self.model_trainer_artifact = model_trainer_artifact
         self.data_ingestion_artifact = data_ingestion_artifact
         self.aws_s3_config = AwsS3Config()
@@ -43,13 +44,13 @@ class ModelEvaluation:
             Revisions   :   moved setup to cloud
         """
         try:
-            obj_det_s3_model_dir_path = self.model_eval_config.obj_det_aws_s3_model_dir_path
-            text_det_s3_model_dir_path = self.model_eval_config.text_det_aws_s3_model_dir_path
+            obj_det_s3_model_dir_path = self.model_evaluation_config.obj_det_aws_s3_model_dir_path
+            text_det_s3_model_dir_path = self.model_evaluation_config.text_det_aws_s3_model_dir_path
 
             #local artifacts dir
 
-            obj_det_best_model_dir = self.model_eval_config.obj_det_best_model_dir
-            text_det_best_model_dir = self.model_eval_config.text_det_best_model_dir
+            obj_det_best_model_dir = self.model_evaluation_config.obj_det_best_model_dir
+            text_det_best_model_dir = self.model_evaluation_config.text_det_best_model_dir
 
             #object detection model download 
 
@@ -142,7 +143,7 @@ class ModelEvaluation:
             Revisions   :   moved setup to cloud
         """
         try:
-            register_coco_instances(name= self.model_eval_config.obj_detection_test_coco_ins_name,
+            register_coco_instances(name= self.model_evaluation_config.obj_detection_test_coco_ins_name,
                         metadata={},    
                         json_file= self.data_ingestion_artifact.obj_detection_coco_test_annot_path,
                         image_root= self.data_ingestion_artifact.obj_detection_testing_data_folder_path )
@@ -153,8 +154,8 @@ class ModelEvaluation:
             
             trained_model_evaluation_result =  self.evaluate_model(weights_path= trained_model_weights,
                                 trained_model_config_file_path= trained_model_config_file_path,
-                                test_coco_ins_name= self.model_eval_config.obj_detection_test_coco_ins_name,
-                                output_dir= self.model_eval_config.obj_detection_model_eval_output_dir)
+                                test_coco_ins_name= self.model_evaluation_config.obj_detection_test_coco_ins_name,
+                                output_dir= self.model_evaluation_config.obj_detection_model_eval_output_dir)
 
 
             trained_model_ap = trained_model_evaluation_result['bbox']['AP']
@@ -167,13 +168,13 @@ class ModelEvaluation:
 
          
 
-                best_model_weights = self.model_eval_config.obj_det_best_model_path
-                best_model_config_file_path = self.model_eval_config.obj_det_best_model_config_file_path
+                best_model_weights = self.model_evaluation_config.obj_det_best_model_path
+                best_model_config_file_path = self.model_evaluation_config.obj_det_best_model_config_file_path
                 best_model_evaluation_result = self.evaluate_model(
                     weights_path= best_model_weights,
                     trained_model_config_file_path= best_model_config_file_path,
-                    test_coco_ins_name= self.model_eval_config.obj_detection_test_coco_ins_name,
-                    output_dir= self.model_eval_config.obj_detection_model_eval_output_dir
+                    test_coco_ins_name= self.model_evaluation_config.obj_detection_test_coco_ins_name,
+                    output_dir= self.model_evaluation_config.obj_detection_model_eval_output_dir
                 )
 
                 #ap: Average Precision
@@ -211,7 +212,7 @@ class ModelEvaluation:
             Revisions   :   moved setup to cloud
         """
         try:
-            register_coco_instances(name= self.model_eval_config.text_detection_test_coco_ins_name,
+            register_coco_instances(name= self.model_evaluation_config.text_detection_test_coco_ins_name,
                         metadata={},    
                         json_file= self.data_ingestion_artifact.text_detection_coco_test_annot_path,
                         image_root= self.data_ingestion_artifact.text_detection_testing_data_folder_path )
@@ -222,8 +223,8 @@ class ModelEvaluation:
             
             trained_model_evaluation_result =  self.evaluate_model(weights_path= trained_model_weights,
                                 trained_model_config_file_path= trained_model_config_file_path,
-                                test_coco_ins_name= self.model_eval_config.text_detection_test_coco_ins_name,
-                                output_dir= self.model_eval_config.text_detection_model_eval_output_dir)
+                                test_coco_ins_name= self.model_evaluation_config.text_detection_test_coco_ins_name,
+                                output_dir= self.model_evaluation_config.text_detection_model_eval_output_dir)
 
 
             trained_model_ap = trained_model_evaluation_result['bbox']['AP']
@@ -236,13 +237,13 @@ class ModelEvaluation:
 
          
 
-                best_model_weights = self.model_eval_config.text_det_best_model_path
-                best_model_config_file_path = self.model_eval_config.text_det_best_model_config_file_path
+                best_model_weights = self.model_evaluation_config.text_det_best_model_path
+                best_model_config_file_path = self.model_evaluation_config.text_det_best_model_config_file_path
                 best_model_evaluation_result = self.evaluate_model(
                     weights_path= best_model_weights,
                     trained_model_config_file_path= best_model_config_file_path,
-                    test_coco_ins_name= self.model_eval_config.text_detection_test_coco_ins_name,
-                    output_dir= self.model_eval_config.text_detection_model_eval_output_dir
+                    test_coco_ins_name= self.model_evaluation_config.text_detection_test_coco_ins_name,
+                    output_dir= self.model_evaluation_config.text_detection_model_eval_output_dir
                 )
 
                 #ap: Average Precision
@@ -264,7 +265,7 @@ class ModelEvaluation:
         except Exception as e:
             raise SketchtocodeException(e,sys)
 
-    def initiate_evaluation(self):
+    def initiate_model_evaluation(self):
         """
             Method Name :   initiate_evaluation
             Description :   This method initiates the model evaluation component of the training pipeline. 

@@ -35,10 +35,11 @@ from detectron2.config import get_cfg
 
 class ModelTrainer:
 
-    def __init__(self, data_ingestion_artifact: DataIngestionArtifact ):
+    def __init__(self, data_ingestion_artifact: DataIngestionArtifact,
+    model_trainer_config: ModelTrainerConfig):
 
         self.data_ingestion_artifact = data_ingestion_artifact
-        self.model_trainer_config = ModelTrainerConfig()
+        self.model_trainer_config = model_trainer_config
         self.model_config = get_model_config_attribute()
         
         

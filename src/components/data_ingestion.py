@@ -11,9 +11,9 @@ from src.entity.artifact_entity import DataIngestionArtifact
 
 class DataIngestion:
 
-    def __init__(self) -> None:
+    def __init__(self, data_ingestion_config: DataIngestionConfig) -> None:
         self.s3_syncer = S3Sync()
-        self.data_ingestion_config = DataIngestionConfig()
+        self.data_ingestion_config = data_ingestion_config
         self.aws_s3_config = AwsS3Config()
         
 

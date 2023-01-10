@@ -12,12 +12,13 @@ class ModelPusher:
 
     def __init__(self,
                 model_trainer_artifact: ModelTrainerArtifact,
-                model_evaluation_artifact: ModelEvaluationArtifact):
+                model_evaluation_artifact: ModelEvaluationArtifact,
+                model_pusher_config: ModelPusherConfig,):
                 
 
         self.model_trainer_artifact = model_trainer_artifact
         self.model_evaluation_artifact = model_evaluation_artifact
-        self.model_pusher_config = ModelPusherConfig()
+        self.model_pusher_config = model_pusher_config
 
         self.s3_sync = S3Sync()
 
@@ -67,7 +68,7 @@ class ModelPusher:
             if self.model_evaluation_artifact.is_text_det_model_accepted:
 
                 #removing existing model in s3
-                command = f"aws s3 rm s3://{self.model_pusher_config.text_detection_s3_model_store_dir_path}"
+                command = f"aws s3 rm s3://{self.model_pusher_config.text_detection_s3_model_store_dir_path} --recursive"
                 os.system(command)
                 lg.info("existing model is removed")
 
@@ -91,4 +92,9 @@ class ModelPusher:
              
         except Exception as e:
             raise SketchtocodeException(e,sys)
+
+
+
+
+    
 
