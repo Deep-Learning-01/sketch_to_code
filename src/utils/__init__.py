@@ -1,5 +1,6 @@
 import yaml
 from src.constant.training_pipeline import *
+from src.constant.prediction_pipeline import *
 from src.exception import SketchtocodeException
 
 from detectron2.config.config import CfgNode
@@ -18,14 +19,32 @@ def read_yaml_file(filepath: str) -> dict:
             raise SketchtocodeException(e, sys)
 
 
-def get_model_config_attribute():
+def get_training_model_config_attribute():
     try:
-        model_config_file_path = MODEL_CONFIG_FILE_PATH
+        model_config_file_path = os.path.join(ROOT_DIR,CONFIG_STORE_DIR, 
+                                                MODEL_TRAINER_TEXT_DET_MODEL_YAML_FILE_DIR_NAME,
+                                                MODEL_CONFIG_FILE_NAME)
         model_config_yaml = read_yaml_file(model_config_file_path)
         model_config_attributes = ConfigBox(model_config_yaml)
         return model_config_attributes
     except Exception as e:
         raise SketchtocodeException(e, sys)
+
+
+
+
+def get_prediction_model_config_attribute():
+    try:
+        model_config_file_path = os.path.join(ROOT_DIR,CONFIG_STORE_DIR, 
+                                                MODEL_PREDICTOR_MODEL_YAML_FILE_DIR_NAME,
+                                                MODEL_PREDICTOR_MODEL_YAML_FILE_NAME)
+        model_config_yaml = read_yaml_file(model_config_file_path)
+        model_config_attributes = ConfigBox(model_config_yaml)
+        return model_config_attributes
+
+    except Exception as e:
+        raise SketchtocodeException(e, sys)
+
 
 def save_model_config_to_yaml_file(model_config:CfgNode, model_config_file_path:str):
     try:

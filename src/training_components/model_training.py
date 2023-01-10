@@ -5,7 +5,7 @@ from src.exception import SketchtocodeException
 
 from src.entity.artifact_entity import ModelTrainerArtifact, DataIngestionArtifact
 from src.entity.config_entity import ModelTrainerConfig
-from src.utils import get_model_config_attribute, save_model_config_to_yaml_file
+from src.utils import get_training_model_config_attribute, save_model_config_to_yaml_file
 
 import torch, torchvision
 
@@ -40,7 +40,7 @@ class ModelTrainer:
 
         self.data_ingestion_artifact = data_ingestion_artifact
         self.model_trainer_config = model_trainer_config
-        self.model_config = get_model_config_attribute()
+        self.model_config = get_training_model_config_attribute()
         
         
 

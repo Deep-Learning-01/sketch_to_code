@@ -3,13 +3,13 @@ from src.training_components.model_training import ModelTrainer
 from src.training_components.model_evaluation import ModelEvaluation
 from src.training_components.model_pusher import ModelPusher
 
-from src.entity.artifact_entity import (DataIngestionArtifact,
+from src.entity.training_entity.artifact_entity import (DataIngestionArtifact,
                                         ModelTrainerArtifact,
                                         ModelEvaluationArtifact,
                                         ModelPusherArtifact)
 
 
-from src.entity.config_entity import (DataIngestionConfig,
+from src.entity.training_entity.config_entity import (DataIngestionConfig,
                                         ModelTrainerConfig,
                                         ModelEvaluationConfig,
                                         ModelPusherConfig)

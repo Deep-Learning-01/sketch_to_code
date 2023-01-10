@@ -6,7 +6,7 @@ MODEL_CONFIG:
       SOLVER:
         IMS_PER_BATCH: 2
         BASE_LR: 0.001
-        MAX_ITER: 10000
+        MAX_ITER: 10
       MODEL:
         ROI_HEADS:
           BATCH_SIZE_PER_IMAGE: 32
@@ -16,7 +16,7 @@ MODEL_CONFIG:
     CONFIG:
       WEIGHTS: R-101.pkl
       SOLVER:
-        MAX_ITER: 1000
+        MAX_ITER: 10
       
 
       

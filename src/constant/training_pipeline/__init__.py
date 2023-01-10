@@ -6,14 +6,19 @@ from from_root import from_root
 PIPELINE_NAME: str = "src"
 ARTIFACT_DIR: str = "artifact"
 TRAINING_ARTIFACT_DIR = "training_artifacts"
+CONFIG_STORE_DIR: str = "configs"
+MODEL_CONFIG_FILE_NAME: str = "model_config.yaml"
 
 LOG_DIR = "logs"
 LOG_FILE = "sktc.log"
 
 # common file name
 ROOT_DIR = from_root()
-MODEL_CONFIG_FILE_PATH = os.path.join(ROOT_DIR,"config", "model_config.yaml")
 
+#aws s3 constants
+
+S3_OBJ_DET_DIR: str = "object_detection"
+S3_TEXT_DET_DIR: str = "text_detection"
 
 """
 Data Ingestion related constant start with DATA_INGESTION VAR NAME
@@ -21,8 +26,7 @@ Data Ingestion related constant start with DATA_INGESTION VAR NAME
 DATA_INGESTION_DIR_NAME: str = "data_ingestion"
 DATA_INGESTION_INGESTED_DIR: str = "ingested"
 
-DATA_INGESTION_OBJ_DET_DIR: str = "object_detection"
-DATA_INGESTION_TEXT_DET_DIR: str = "text_detection"
+
 
 DATA_INGESTION_DATA_STORE_DIR: str = "dataset"
 DATA_INGESTION_COCO_ANNOT_STORE_DIR: str = "annotations"
@@ -54,7 +58,7 @@ MODEL_TRAINER_TEXT_DET_TRAIN_COCO_INS_DIR: str = "training_texts"
 MODEL_TRAINER_OBJ_DET_MODEL_YAML_FILE_DIR_NAME: str = "COCO-Detection"
 MODEL_TRAINER_OBJ_DET_MODEL_YAML_CONFIG_FILE_NAME: str ="faster_rcnn_R_50_FPN_3x.yaml"
 
-MODEL_TRAINER_TEXT_DET_MODEL_YAML_FILE_DIR_NAME: str =  "config"
+MODEL_TRAINER_TEXT_DET_MODEL_YAML_FILE_DIR_NAME: str =  "training_configs"
 MODEL_TRAINER_TEXT_DET_MODEL_YAML_CONFIG_FILE_NAME: str = "sign_faster_rcnn_R_101_FPN_3x.yaml"
 
 """

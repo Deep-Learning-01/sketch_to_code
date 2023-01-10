@@ -57,8 +57,8 @@ class DataIngestionConfig:
     data_ingestion_dir: str = os.path.join(training_pipeline_config.artifact_dir, DATA_INGESTION_DIR_NAME)    
     ingested_data_dir: str = os.path.join(data_ingestion_dir, DATA_INGESTION_INGESTED_DIR)
 
-    object_detection_dir: str  = os.path.join(ingested_data_dir, DATA_INGESTION_OBJ_DET_DIR)
-    text_detection_dir: str = os.path.join(ingested_data_dir, DATA_INGESTION_TEXT_DET_DIR)
+    object_detection_dir: str  = os.path.join(ingested_data_dir, S3_OBJ_DET_DIR)
+    text_detection_dir: str = os.path.join(ingested_data_dir, S3_TEXT_DET_DIR)
 
     object_detection_data_store_dir: str =  os.path.join(object_detection_dir, DATA_INGESTION_DATA_STORE_DIR )
     object_detection_coco_annot_data_store_dir: str = os.path.join( object_detection_dir,DATA_INGESTION_COCO_ANNOT_STORE_DIR )
@@ -127,7 +127,7 @@ class ModelTrainerConfig:
     obj_detection_model_yaml_file_path:str = os.path.join(MODEL_TRAINER_OBJ_DET_MODEL_YAML_FILE_DIR_NAME,
                                                         MODEL_TRAINER_OBJ_DET_MODEL_YAML_CONFIG_FILE_NAME)
 
-    text_detection_model_yaml_file_path: str = os.path.join(ROOT_DIR, MODEL_TRAINER_TEXT_DET_MODEL_YAML_FILE_DIR_NAME,
+    text_detection_model_yaml_file_path: str = os.path.join(ROOT_DIR, CONFIG_STORE_DIR, MODEL_TRAINER_TEXT_DET_MODEL_YAML_FILE_DIR_NAME,
                                                             MODEL_TRAINER_TEXT_DET_MODEL_YAML_CONFIG_FILE_NAME)
 
     obj_detection_saved_model_path:str = os.path.join(obj_detection_model_output_dir,
