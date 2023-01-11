@@ -5,8 +5,8 @@ from src.logger import logging as lg
 from src.exception import SketchtocodeException
 
 from src.cloud_storage.aws_syncer import S3Sync
-from src.entity.config_entity import DataIngestionConfig, AwsS3Config
-from src.entity.artifact_entity import DataIngestionArtifact
+from src.entity.training_entity.config_entity import DataIngestionConfig, AwsS3Config
+from src.entity.training_entity.artifact_entity import DataIngestionArtifact
 
 
 class DataIngestion:
