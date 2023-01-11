@@ -42,11 +42,13 @@ training_pipeline_config: PredictionPipelineConfig = PredictionPipelineConfig()
 class PredictionPipelineConfig:
 
     obj_det_s3_model_path: str = os.path.join( TRAINING_BUCKET_NAME,
-                                            S3_OBJ_DET_DIR)
+                                            S3_OBJ_DET_DIR,
+                                            MODEL_TRAINER_TRAINED_MODEL_OUTPUT_DIR)
 
 
     text_det_s3_model_path: str = os.path.join( TRAINING_BUCKET_NAME,
-                                                S3_TEXT_DET_DIR)
+                                                S3_TEXT_DET_DIR,
+                                                MODEL_TRAINER_TRAINED_MODEL_OUTPUT_DIR)
 
 
 
@@ -74,9 +76,9 @@ class PredictionPipelineConfig:
 
 
     obj_det_model_config_path: str = os.path.join( obj_det_saved_model_dir,
-    MODEL_TRAINER_TRAINED_MODEL_NAME)
+    MODEL_TRAINER_TRAINED_MODEL_CONFIG_FILE_NAME)
 
     text_det_model_config_path: str = os.path.join( text_det_saved_model_dir,
-    MODEL_TRAINER_TRAINED_MODEL_NAME ) 
+    MODEL_TRAINER_TRAINED_MODEL_CONFIG_FILE_NAME ) 
 
     
