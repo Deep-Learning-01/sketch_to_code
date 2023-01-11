@@ -4,8 +4,8 @@ import os,sys
 from src.logger import logging as lg
 from src.exception import SketchtocodeException
 from src.cloud_storage.aws_syncer import S3Sync
-from src.entity.artifact_entity import ModelTrainerArtifact, ModelEvaluationArtifact
-from src.entity.config_entity import ModelPusherConfig
+from src.entity.training_entity.artifact_entity import ModelTrainerArtifact, ModelEvaluationArtifact
+from src.entity.training_entity.config_entity import ModelPusherConfig
 
 
 class ModelPusher:

@@ -3,8 +3,8 @@ import os,sys
 from src.logger import logging as lg
 from src.exception import SketchtocodeException
 
-from src.entity.artifact_entity import ModelTrainerArtifact, DataIngestionArtifact
-from src.entity.config_entity import ModelTrainerConfig
+from src.entity.training_entity.artifact_entity import ModelTrainerArtifact, DataIngestionArtifact
+from src.entity.training_entity.config_entity import ModelTrainerConfig
 from src.utils import get_training_model_config_attribute, save_model_config_to_yaml_file
 
 import torch, torchvision

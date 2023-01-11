@@ -31,7 +31,14 @@ def get_training_model_config_attribute():
         raise SketchtocodeException(e, sys)
 
 
-
+def get_yaml_file_attributes(yaml_file_path):
+    try:
+        yaml_file = read_yaml_file(yaml_file_path)
+        yaml_attributes = ConfigBox(yaml_file)
+        return yaml_attributes
+        
+    except Exception as e:
+        raise SketchtocodeException(e, sys)
 
 def get_prediction_model_config_attribute():
     try:

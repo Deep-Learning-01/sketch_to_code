@@ -1,11 +1,12 @@
 import os,sys
 from src.logger import logging as lg
 from src.exception import SketchtocodeException
-from src.entity.artifact_entity import ModelEvaluationArtifact, ModelTrainerArtifact, DataIngestionArtifact
+from src.entity.training_entity.artifact_entity import ModelEvaluationArtifact, ModelTrainerArtifact, DataIngestionArtifact
 
-from src.entity.config_entity import ModelEvaluationConfig, AwsS3Config
+from src.entity.training_entity.config_entity import ModelEvaluationConfig, AwsS3Config
 from src.cloud_storage.aws_syncer import S3Sync
 from src.utils import is_model_present_in_s3
+from src.utils.common import setup_config
 
 
 from detectron2.engine import default_setup
@@ -74,20 +75,6 @@ class ModelEvaluation:
 
 
 
-    def setup_config(self,args):
-        """
-            Create configs and perform basic setups.
-        """
-        try:
-            config = get_cfg()
-            config.merge_from_file(args.config_file)
-            config.merge_from_list(args.opts)
-            config.freeze()
-            default_setup(config, args)
-            return config
-        except Exception as e:
-            raise SketchtocodeException(e,sys)
-
     def evaluate_model(self,
                         weights_path:str,
                         trained_model_config_file_path: str, 
@@ -108,10 +95,10 @@ class ModelEvaluation:
             Revisions   :   moved setup to cloud
         """
         try:
-            parser = default_argument_parser()
-            config_args = f"--config-file {trained_model_config_file_path} MODEL.WEIGHTS {weights_path}"
-            args = parser.parse_args(config_args.split())
-            config = self.setup_config(args)
+            
+
+            config = setup_config(trained_model_config_file_path=trained_model_config_file_path,
+                                weights_path= weights_path)
 
             predictor = DefaultPredictor(config)
 
