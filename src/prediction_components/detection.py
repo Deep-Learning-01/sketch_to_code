@@ -115,7 +115,7 @@ class Detection:
 
     def initiate_detection(self, input_image_file) -> DetectionArtifact:
         """
-            Method Name :   initiate_obj_detection_prediction
+            Method Name :   initiate_detection
             Description :   This method initiates the object detection prediction
             Output      :   NA
             On Failure  :   Write an exception log and then raise an exception
