@@ -154,9 +154,11 @@ win-inet-pton==1.1.0
 wincertstore==0.2
 yacs==0.1.8
 zipp==3.8.1
+mmocr
 openmim
-mmcv-full
+mmcv-full ==1.5.0
 mmdet
+
 fastapi== 0.88.0
 from-root==1.0.2
 
