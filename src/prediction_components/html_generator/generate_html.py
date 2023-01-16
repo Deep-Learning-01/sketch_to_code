@@ -125,6 +125,7 @@ class GenerateHtml:
             boxes = self.create_text_boxes_with_html()
 
             rows = self.get_html_rows_and_columns(boxes)
+            print(rows)
 
             html_output = self.create_html.generate(rows)
 

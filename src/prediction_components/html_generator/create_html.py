@@ -6,7 +6,7 @@ from src.prediction_components.html_generator.elements import getElements
 from src.exception import SketchtocodeException
 import os
 import sys
-from src.prediction_components.html_generator.ocr import ApplyOCR
+from src.prediction_components.html_generator.ocr import ApplyOcr
 
 
 class CreateHTML:
@@ -14,7 +14,7 @@ class CreateHTML:
         self.image = image
         self.add = Airium()
         # self.parsed_yaml = yamlFile
-        self.ocr = ApplyOCR(self.image)
+        self.ocr = ApplyOcr(self.image)
 
     def generate(self, rows):
 
@@ -64,6 +64,7 @@ class CreateHTML:
                                                 getElements(self.add, box[-1], text)
                                                 # str(self.add)
                                             else:
+                                                print('box last element', box[-1])
                                                 getElements(self.add, box[-1])
 
             html = ""
@@ -81,5 +82,5 @@ class CreateHTML:
 
             # logging.info("HTML File Saved Successfully...")
         except Exception as e:
-            lg.error("Error occurred while generating HTML. ", e)
+            raise SketchtocodeException(e,sys)
             # raise AppException(e, sys)
