@@ -1,0 +1,15 @@
+.ipynb_checkpoints
+artifact
+artifact_old
+build
+dist
+env
+test_env
+
+notebooks
+project_setups
+src.egg-info
+demo.py
+testing
+init_setup.sh
+README.md
