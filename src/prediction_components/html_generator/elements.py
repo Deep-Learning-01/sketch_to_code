@@ -1,4 +1,4 @@
-def getCheckbox(**kwargs):
+def get_checkbox(**kwargs):
     print("checkbox...")
     with kwargs['add'].div(klass="form-check"):
         kwargs['add'].input(klass="form-check-input", type="checkbox", id="sample_check1", name="sample_check1")
@@ -8,12 +8,12 @@ def getCheckbox(**kwargs):
             kwargs['add']._doc_elements.append(i)
 
 
-def getButton(**kwargs):
+def get_button(**kwargs):
     print("button...")
     kwargs['add'].button(type="button", klass="btn btn-primary px-3", _t=kwargs['text'])
 
 
-def getCarousel():
+def get_carousel():
     string = ['<div class="container">',
               '<div id="carousel" class="carousel slide" data-ride="carousel" style="height:150px; width:200px">',
               '<a class="left carousel-control" href="#carousel" data-slide="prev">',
@@ -42,38 +42,42 @@ def getCarousel():
               '</div>', '</div>', '</div>']
     return string
 
-
-def getHeading(**kwargs):
+def get_text(**kwargs):
     print("heading...")
     with kwargs['add'].p(klass="h4"):
         kwargs['add'](kwargs['text'])
 
-
-def getHeadingsTop(**kwargs):
+def get_heading(**kwargs):
     print("heading...")
     with kwargs['add'].p(klass="h2"):
         kwargs['add'](kwargs['text'])
 
 
-def getImage(**kwargs):
+def get_headings_top(**kwargs):
+    print("heading...")
+    with kwargs['add'].p(klass="h2"):
+        kwargs['add'](kwargs['text'])
+
+
+def get_image(**kwargs):
     print("image...")
     kwargs['add'].img(src="https://www.iconsdb.com/icons/preview/gray/image-file-xxl.png", klass="img-fluid mt-4",
                       alt="Image will be here")
 
 
-def getLabel(**kwargs):
+def get_label(**kwargs):
     print("label...")
     with kwargs['add'].label():
         kwargs['add'](kwargs['text'])
 
 
-def getLink(**kwargs):
+def get_link(**kwargs):
     print("link...")
     with kwargs['add'].a(href="#", klass="stretched-link"):
         kwargs['add'](kwargs['text'])
 
 
-def getPagination(**kwargs):
+def get_pagination(**kwargs):
     print("pagination...")
     with kwargs['add'].ul(klass="pagination"):
         with kwargs['add'].li(klass="page-item"):
@@ -88,7 +92,7 @@ def getPagination(**kwargs):
             kwargs['add'].a(klass="page-item", href="#", _t="Next")
 
 
-def getParagraph(**kwargs):
+def get_paragraph(**kwargs):
     print("paragraph...")
     with kwargs['add'].p(klass="text-black-50"):
         kwargs['add']("Lorem ipsum dolor sit amet, consectetur adipiscing elit \
@@ -98,7 +102,7 @@ def getParagraph(**kwargs):
         Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris")
 
 
-def getRadioButton(**kwargs):
+def get_radio_button(**kwargs):
     print("radio_button...")
     with kwargs['add'].div(klass="form-check"):
         kwargs['add'].input(type="radio", klass="form-check-input", name="radio_button1", id="radio_button1")
@@ -108,7 +112,7 @@ def getRadioButton(**kwargs):
             kwargs['add']._doc_elements.append(i)
 
 
-def getSelect(**kwargs):
+def get_select(**kwargs):
     print("select...")
     with kwargs['add'].select(klass="form-select"):
         kwargs['add'].option(value="0", _t="Select your choice")
@@ -117,7 +121,7 @@ def getSelect(**kwargs):
         kwargs['add'].option(value="3", _t="OptionThree")
 
 
-def getTable(**kwargs):
+def get_table(**kwargs):
     print("table...")
     with kwargs['add'].table():
         with kwargs['add'].thead().tr():
@@ -141,24 +145,24 @@ def getTable(**kwargs):
                 kwargs['add'].td()
 
 
-def getTextarea(**kwargs):
+def get_text_area(**kwargs):
     print("textarea...")
     kwargs['add'].textarea(rows="9", cols="40")
 
 
-def getTextBox(**kwargs):
+def get_text_box(**kwargs):
     print("textbox...")
 
     kwargs['add'].input(type='text', name="sample_textbox")
 
 
-actions = [getHeading, getButton, None, getCheckbox, getImage, getLink, getPagination, getParagraph, getRadioButton,
-           getSelect, getTable, getTextarea, getTextBox]
+actions = [get_text, get_button, None, get_checkbox, get_heading, get_image, get_label, get_link, get_pagination,
+           get_paragraph, get_radio_button, get_select, get_table, get_text_area, get_text_box]
 
 
-def getElements(add, label, text="No value"):
-    if (label == 2):
-        string = getCarousel()
+def get_elements(add, label, text="No value"):
+    if label == 2:
+        string = get_carousel()
         for i in string:
             add._doc_elements.append(i)
         return

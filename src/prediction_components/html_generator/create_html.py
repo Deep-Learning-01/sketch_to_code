@@ -1,7 +1,7 @@
 from airium import Airium
 from src.logger import logging as lg
 
-from src.prediction_components.html_generator.elements import getElements
+from src.prediction_components.html_generator.elements import get_elements
 
 from src.exception import SketchtocodeException
 import os
@@ -13,7 +13,6 @@ class CreateHTML:
     def __init__(self, image):
         self.image = image
         self.add = Airium()
-        # self.parsed_yaml = yamlFile
         self.ocr = ApplyOcr(self.image)
 
     def generate(self, rows):
@@ -61,26 +60,21 @@ class CreateHTML:
                                             if (box[-1] == 0 or box[-1] == 1 or box[-1] == 3 or box[-1] == 5 or
                                                     box[-1] == 8):
                                                 text = self.ocr.get_ocr_text(box)
-                                                getElements(self.add, box[-1], text)
+                                                get_elements(self.add, box[-1], text)
                                                 # str(self.add)
                                             else:
-                                                print('box last element', box[-1])
-                                                getElements(self.add, box[-1])
+                                                last_value = box[-1]
+                                                print('box last element', last_value)
+                                                get_elements(self.add, box[-1])
 
             html = ""
             html = str(self.add)
 
             lg.info("Finished generating HTML File")
-            # logging.info("Saving HTML File...")
-            # dir = os.path.join(self.parsed_yaml['root_dir'], self.parsed_yaml['prediction']['out_dir'])
+
 
             return html
 
-            # file = os.path.join(dir, 'HTMLOutput.html')
-            # with open(file, 'a') as f:
-            #     f.write(html)
-
-            # logging.info("HTML File Saved Successfully...")
         except Exception as e:
             raise SketchtocodeException(e,sys)
-            # raise AppException(e, sys)
+
