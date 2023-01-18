@@ -67,7 +67,7 @@ pip install -r requirements.txt
 6. . Download Detectron 2 
 
 ```
-python -m pip install 'git+https://github.com/facebookresearch/detectron2.git'
+                           python -m pip install 'git+https://github.com/facebookresearch/detectron2.git'
 ```
 
 
