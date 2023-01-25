@@ -1,4 +1,4 @@
-import os,sys 
+import os, sys
 
 from src.constant.s3_bucket import *
 from src.logger import logging as lg
@@ -15,7 +15,6 @@ class DataIngestion:
         self.s3_syncer = S3Sync()
         self.data_ingestion_config = data_ingestion_config
         self.aws_s3_config = AwsS3Config()
-        
 
     def get_object_detection_data(self):
 
@@ -28,17 +27,17 @@ class DataIngestion:
             Version     :   1.2
             Revisions   :   moved setup to cloud
         """
-        
+
         try:
             self.s3_syncer.sync_folder_from_s3(
-            aws_folder_path = self.aws_s3_config.obj_det_dataset_path,
-            folder= self.data_ingestion_config.object_detection_data_store_dir
-            ) 
-            
+                aws_folder_path=self.aws_s3_config.obj_det_dataset_path,
+                folder=self.data_ingestion_config.object_detection_data_store_dir
+            )
+
             lg.info("obj detection data download complete")
 
         except Exception as e:
-            raise SketchtocodeException(e,sys)
+            raise SketchtocodeException(e, sys)
 
     def get_text_detection_data(self):
         """
@@ -50,18 +49,17 @@ class DataIngestion:
             Version     :   1.2
             Revisions   :   moved setup to cloud
         """
-        
 
         try:
             self.s3_syncer.sync_folder_from_s3(
-            aws_folder_path = self.aws_s3_config.text_det_dataset_path,
-            folder= self.data_ingestion_config.text_detection_data_store_dir
-            ) 
-            
+                aws_folder_path=self.aws_s3_config.text_det_dataset_path,
+                folder=self.data_ingestion_config.text_detection_data_store_dir
+            )
+
             lg.info("text detection data download complete")
         except Exception as e:
-            raise SketchtocodeException(e,sys)
-    
+            raise SketchtocodeException(e, sys)
+
     def get_object_detection_coco_annot_instances(self):
 
         """
@@ -73,17 +71,17 @@ class DataIngestion:
             Version     :   1.2
             Revisions   :   moved setup to cloud
         """
-        
+
         try:
             self.s3_syncer.sync_folder_from_s3(
-            aws_folder_path= self.aws_s3_config.obj_det_coco_annot_path,
-            folder= self.data_ingestion_config.object_detection_coco_annot_data_store_dir
-            ) 
-            
+                aws_folder_path=self.aws_s3_config.obj_det_coco_annot_path,
+                folder=self.data_ingestion_config.object_detection_coco_annot_data_store_dir
+            )
+
             lg.info("obj detection annot data download complete")
         except Exception as e:
-            raise SketchtocodeException(e,sys)
-    
+            raise SketchtocodeException(e, sys)
+
     def get_text_detection_coco_annot_instances(self):
 
         """
@@ -95,17 +93,16 @@ class DataIngestion:
             Version     :   1.2
             Revisions   :   moved setup to cloud
         """
-        
 
         try:
             self.s3_syncer.sync_folder_from_s3(
-            aws_folder_path = self.aws_s3_config.text_det_coco_annot_path,
-            folder= self.data_ingestion_config.text_detection_coco_annot_data_store_dir
-            ) 
-            
+                aws_folder_path=self.aws_s3_config.text_det_coco_annot_path,
+                folder=self.data_ingestion_config.text_detection_coco_annot_data_store_dir
+            )
+
             lg.info("text detection annot data download complete")
         except Exception as e:
-            raise SketchtocodeException(e,sys)
+            raise SketchtocodeException(e, sys)
 
     def initiate_data_ingestion(self) -> DataIngestionArtifact:
 
@@ -123,28 +120,23 @@ class DataIngestion:
             self.get_object_detection_data()
             self.get_text_detection_data()
             self.get_object_detection_coco_annot_instances()
-            self.get_text_detection_coco_annot_instances() 
+            self.get_text_detection_coco_annot_instances()
 
             lg.info("Exited the data ingestion component.")
 
-
             data_ingestion_artifact = DataIngestionArtifact(
-                obj_detection_training_data_folder_path = self.data_ingestion_config.obj_detection_train_data_dir,
-                obj_detection_testing_data_folder_path= self.data_ingestion_config.obj_detection_test_data_dir,
-                obj_detection_coco_train_annot_path = self.data_ingestion_config.obj_detection_train_coco_annot_path,
-                obj_detection_coco_test_annot_path = self.data_ingestion_config.obj_detection_test_coco_annot_path,
+                obj_detection_training_data_folder_path=self.data_ingestion_config.obj_detection_train_data_dir,
+                obj_detection_testing_data_folder_path=self.data_ingestion_config.obj_detection_test_data_dir,
+                obj_detection_coco_train_annot_path=self.data_ingestion_config.obj_detection_train_coco_annot_path,
+                obj_detection_coco_test_annot_path=self.data_ingestion_config.obj_detection_test_coco_annot_path,
 
-                text_detection_training_data_folder_path= self.data_ingestion_config.text_detection_train_data_dir,
-                text_detection_testing_data_folder_path= self.data_ingestion_config.text_detection_test_data_dir,
-                text_detection_coco_train_annot_path = self.data_ingestion_config.text_detection_train_coco_annot_path,
-                text_detection_coco_test_annot_path= self.data_ingestion_config.text_detection_test_coco_annot_path 
-
-
+                text_detection_training_data_folder_path=self.data_ingestion_config.text_detection_train_data_dir,
+                text_detection_testing_data_folder_path=self.data_ingestion_config.text_detection_test_data_dir,
+                text_detection_coco_train_annot_path=self.data_ingestion_config.text_detection_train_coco_annot_path,
+                text_detection_coco_test_annot_path=self.data_ingestion_config.text_detection_test_coco_annot_path
 
             )
 
             return data_ingestion_artifact
         except Exception as e:
-            raise SketchtocodeException(e,sys)
-
-    
+            raise SketchtocodeException(e, sys)

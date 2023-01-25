@@ -48,6 +48,17 @@ class GenerateHtml:
             raise SketchtocodeException(e, sys)
 
     def create_text_boxes_with_html(self):
+        """
+                    Method Name :   create_text_boxes_with_html
+                    Description :   This method returns a list containing prediction boxes and labels
+
+                    Output      :   a list of rows and columns
+                    On Failure  :   Write an exception log and then raise an exception
+
+                    Version     :   1.2
+                    Revisions   :   moved setup to cloud
+
+        """
         try:
             boxes, boxes_text = self.get_boxes()
             boxes_text = self.text_process.check_for_text_bboxes_with_html(boxes_text, boxes)
@@ -121,6 +132,17 @@ class GenerateHtml:
             raise SketchtocodeException(e, sys)
 
     def generate_html(self):
+        """
+            Method Name :   generate_html
+            Description :   This method returns a HTML output string
+
+            Output      :   a list of rows and columns
+            On Failure  :   Write an exception log and then raise an exception
+
+            Version     :   1.2
+            Revisions   :   moved setup to cloud
+
+        """
         try:
             boxes = self.create_text_boxes_with_html()
 

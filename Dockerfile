@@ -28,12 +28,11 @@ ENV PATH /opt/conda/bin:$PATH
 
 
 # setup conda virtual environment
-#RUN conda update conda \
-#    && conda create --prefix skcenv python=3.8
+RUN conda create --prefix skcenv python=3.8
 
 RUN #echo "conda activate skcenv" >> ~/.bashrc
 ENV PATH /opt/conda/envs/skcenv/bin:$PATH
-ENV CONDA_DEFAULT_ENV $base
+ENV CONDA_DEFAULT_ENV $skcenv
 
 
 #project setup
@@ -41,7 +40,12 @@ WORKDIR /app
 
 COPY . /app
 
-RUN apt-get update && apt-get install awscli -y  \
+
+RUN echo "conda init bash" >> ~/.bashrc && \
+    echo "reset" >> ~/.bashrc
+
+RUN conda activate skcenv \
+    && apt-get update && apt-get install awscli -y  \
 #    echo "conda uninstall sypder" >> ~/.bash \
 #    echo "conda uninstall numba"
     && pip install --upgrade pip && pip install -r requirements.txt

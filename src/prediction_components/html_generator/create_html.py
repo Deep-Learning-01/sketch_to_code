@@ -17,11 +17,16 @@ class CreateHTML:
 
     def generate(self, rows):
 
-        '''
-            This is the actual class responsible to generate HTML code using "Airium" python library
-            param: rows
-            return:
-        '''
+        """
+            Method Name :   generate
+            Description :   This method generates a html file.
+            Output      :   NA
+            On Failure  :   Write an exception log and then raise an exception
+
+            Version     :   1.2
+            Revisions   :   moved setup to cloud
+
+        """
 
         lg.info("Started generating HTML file ")
 
@@ -67,14 +72,10 @@ class CreateHTML:
                                                 print('box last element', last_value)
                                                 get_elements(self.add, box[-1])
 
-            html = ""
             html = str(self.add)
-
             lg.info("Finished generating HTML File")
-
 
             return html
 
         except Exception as e:
-            raise SketchtocodeException(e,sys)
-
+            raise SketchtocodeException(e, sys)

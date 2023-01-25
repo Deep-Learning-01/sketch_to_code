@@ -10,30 +10,36 @@ class TextAlignment:
         self.util = HtmlUtils()
 
     def check_for_text_bboxes_with_html(self, text_boxes, html_boxes):
-
         """
-            Description: Purpose of this method is to check the overlapping of the text detection bboxes with html elements.
-            If the overlapping is above of specified limit then we simply delete that text detection box.
-            Conditions we have to check:
-                1. Other at bottom right
-                2. Other at top right
-                3. Other at top left
-                4. Other at bottom left
-                5. Other at exact right
-                6. Other at exact left
-                7. Other at exact bottom
-                8. Other at exact top
-                9. In the middle
-            param: boxes, labels, htmlboxes
-            return: list
-            :type html_boxes: object
+            Method Name :   check_for_text_bboxes_with_html
+            Description :   Purpose of this method is to check the overlapping
+                            of the text detection bboxes with html elements.
+
+
+                            If the overlapping is above of specified limit then we simply delete that text detection box.
+                            Conditions we have to check:
+                                1. Other at bottom right
+                                2. Other at top right
+                                3. Other at top left
+                                4. Other at bottom left
+                                5. Other at exact right
+                                6. Other at exact left
+                                7. Other at exact bottom
+                                8. Other at exact top
+                                9. In the middle
+
+            Output      :   list of text boxes
+            On Failure  :   Write an exception log and then raise an exception
+
+            Version     :   1.2
+            Revisions   :   moved setup to cloud
+
         """
 
         try:
             lg.info("Checking for text bboxes with HTML bboxes...")
 
             t = 0
-            h = 0
 
             for tbox in range(0, len(text_boxes)):
                 h = 0
@@ -41,9 +47,11 @@ class TextAlignment:
 
                     # check for bottom right
                     if (
-                            html_boxes[h][3] > text_boxes[t][1] > html_boxes[h][1] and text_boxes[t][0] < html_boxes[h][2] <
+                            html_boxes[h][3] > text_boxes[t][1] > html_boxes[h][1] and text_boxes[t][0] < html_boxes[h][
+                        2] <
                             text_boxes[t][2] and text_boxes[t][2] > html_boxes[h][2]):
-                        points = [text_boxes[t][3], text_boxes[t][1], html_boxes[h][3], text_boxes[t][1], text_boxes[t][2], text_boxes[t][0],
+                        points = [text_boxes[t][3], text_boxes[t][1], html_boxes[h][3], text_boxes[t][1],
+                                  text_boxes[t][2], text_boxes[t][0],
                                   html_boxes[h][2], text_boxes[t][0]]
 
                         if self.util.checkDistanceForHTML(points):
@@ -52,9 +60,12 @@ class TextAlignment:
                             break
 
                     # check for top right
-                    elif (text_boxes[t][1] < html_boxes[h][1] and (html_boxes[h][3] > text_boxes[t][3] > html_boxes[h][1]) and
-                          (html_boxes[h][0] < text_boxes[t][0] < html_boxes[h][2]) and text_boxes[t][2] > html_boxes[h][2]):
-                        points = [text_boxes[t][3], text_boxes[t][1], text_boxes[t][3], html_boxes[h][1], text_boxes[t][2], text_boxes[t][0],
+                    elif (text_boxes[t][1] < html_boxes[h][1] and (
+                            html_boxes[h][3] > text_boxes[t][3] > html_boxes[h][1]) and
+                          (html_boxes[h][0] < text_boxes[t][0] < html_boxes[h][2]) and text_boxes[t][2] > html_boxes[h][
+                              2]):
+                        points = [text_boxes[t][3], text_boxes[t][1], text_boxes[t][3], html_boxes[h][1],
+                                  text_boxes[t][2], text_boxes[t][0],
                                   html_boxes[h][2], text_boxes[t][0]]
 
                         if self.util.checkDistanceForHTML(points):
@@ -63,9 +74,12 @@ class TextAlignment:
                             break
 
                     # check for top left
-                    elif (text_boxes[t][1] < html_boxes[h][1] and (html_boxes[h][3] > text_boxes[t][3] > html_boxes[h][1]) and
-                          (html_boxes[h][0] < text_boxes[t][2] < html_boxes[h][2]) and text_boxes[t][0] < html_boxes[h][0]):
-                        points = [text_boxes[t][3], text_boxes[t][1], text_boxes[t][3], html_boxes[h][1], text_boxes[t][2], text_boxes[t][0],
+                    elif (text_boxes[t][1] < html_boxes[h][1] and (
+                            html_boxes[h][3] > text_boxes[t][3] > html_boxes[h][1]) and
+                          (html_boxes[h][0] < text_boxes[t][2] < html_boxes[h][2]) and text_boxes[t][0] < html_boxes[h][
+                              0]):
+                        points = [text_boxes[t][3], text_boxes[t][1], text_boxes[t][3], html_boxes[h][1],
+                                  text_boxes[t][2], text_boxes[t][0],
                                   text_boxes[t][2], html_boxes[h][0]]
 
                         if self.util.checkDistanceForHTML(points):
@@ -74,9 +88,12 @@ class TextAlignment:
                             break
 
                     # check for bottom left
-                    elif ((html_boxes[h][0] < text_boxes[t][1] < html_boxes[h][3]) and text_boxes[t][3] > html_boxes[h][3] and
-                          text_boxes[t][0] < html_boxes[h][0] and (html_boxes[h][0] < text_boxes[t][2] < html_boxes[h][2])):
-                        points = [text_boxes[t][3], text_boxes[t][1], html_boxes[h][3], text_boxes[t][1], text_boxes[t][2], text_boxes[t][0],
+                    elif ((html_boxes[h][0] < text_boxes[t][1] < html_boxes[h][3]) and text_boxes[t][3] > html_boxes[h][
+                        3] and
+                          text_boxes[t][0] < html_boxes[h][0] and (
+                                  html_boxes[h][0] < text_boxes[t][2] < html_boxes[h][2])):
+                        points = [text_boxes[t][3], text_boxes[t][1], html_boxes[h][3], text_boxes[t][1],
+                                  text_boxes[t][2], text_boxes[t][0],
                                   text_boxes[t][2], html_boxes[h][0]]
 
                         if self.util.checkDistanceForHTML(points):
@@ -87,7 +104,8 @@ class TextAlignment:
                     # check for exact right
                     elif ((html_boxes[h][1] < text_boxes[t][1] < html_boxes[h][3]) and (
                             html_boxes[h][1] < text_boxes[t][3] < html_boxes[h][3]) and
-                          (html_boxes[h][0] < text_boxes[t][0] < html_boxes[h][2]) and text_boxes[t][2] > html_boxes[h][2]):
+                          (html_boxes[h][0] < text_boxes[t][0] < html_boxes[h][2]) and text_boxes[t][2] > html_boxes[h][
+                              2]):
                         points = [text_boxes[t][2], text_boxes[t][0], html_boxes[h][2], text_boxes[t][0]]
 
                         if self.util.checkDistanceForHTMLExact(points):
@@ -96,7 +114,8 @@ class TextAlignment:
                             break
 
                     # check for exact left
-                    elif (text_boxes[t][0] < html_boxes[h][0] and (html_boxes[h][0] < text_boxes[t][2] < html_boxes[h][2]) and
+                    elif (text_boxes[t][0] < html_boxes[h][0] and (
+                            html_boxes[h][0] < text_boxes[t][2] < html_boxes[h][2]) and
                           (html_boxes[h][1] < text_boxes[t][1] < html_boxes[h][3]) and (
                                   html_boxes[h][1] < text_boxes[t][3] < html_boxes[h][3])
                           and (html_boxes[h][1] < text_boxes[t][3] < html_boxes[h][3])):
@@ -110,7 +129,8 @@ class TextAlignment:
                     # check for exact bottom
                     elif ((html_boxes[h][0] < text_boxes[t][0] < html_boxes[h][2]) and (
                             html_boxes[h][0] < text_boxes[t][2] < html_boxes[h][2]) and
-                          (html_boxes[h][1] < text_boxes[t][1] < html_boxes[h][3]) and html_boxes[h][3] < text_boxes[t][3]):
+                          (html_boxes[h][1] < text_boxes[t][1] < html_boxes[h][3]) and html_boxes[h][3] < text_boxes[t][
+                              3]):
                         points = [text_boxes[t][3], text_boxes[t][1], html_boxes[h][3], text_boxes[t][1]]
 
                         if self.util.checkDistanceForHTMLExact(points):
@@ -119,7 +139,8 @@ class TextAlignment:
                             break
 
                     # check for exact top
-                    elif (text_boxes[t][1] < html_boxes[h][1] and (html_boxes[h][1] < text_boxes[t][3] < html_boxes[h][3]) and
+                    elif (text_boxes[t][1] < html_boxes[h][1] and (
+                            html_boxes[h][1] < text_boxes[t][3] < html_boxes[h][3]) and
                           (html_boxes[h][0] < text_boxes[t][0] < html_boxes[h][2]) and (
                                   html_boxes[h][0] < text_boxes[t][2] < html_boxes[h][2])):
                         points = [text_boxes[t][3], text_boxes[t][1], text_boxes[t][3], html_boxes[h][1]]
@@ -145,23 +166,32 @@ class TextAlignment:
 
         except Exception as e:
             lg.error("Error occurred while checking for text bboxes. ", e)
+            raise SketchtocodeException(e,sys)
 
     def check_for_text_bboxes(self, boxes):
         """
-            Description: Purpose of this method is to check the overlapping of the text detection bboxes with other text bboxes.
-            If the overlapping is above of specified limit then form the new bbox using their coordinates.
-            Conditions we have to check:
-                1. Other at bottom right
-                2. Other at top right
-                3. Other at top left
-                4. Other at bottom left
-                5. Other at exact right
-                6. Other at exact left
-                7. Other at exact bottom
-                8. Other at exact top
-                9. In the middle
-            param: boxes, labels, htmlboxes
-            return: list
+            Method Name :   check_for_text_bboxes
+            Description :   Purpose of this method is to check the overlapping
+                            of the text detection bboxes with other text bboxes.
+
+
+                            Conditions we have to check:
+                                1. Other at bottom right
+                                2. Other at top right
+                                3. Other at top left
+                                4. Other at bottom left
+                                5. Other at exact right
+                                6. Other at exact left
+                                7. Other at exact bottom
+                                8. Other at exact top
+                                9. In the middle
+
+            Output      :   a list of text bboxes
+            On Failure  :   Write an exception log and then raise an exception
+
+            Version     :   1.2
+            Revisions   :   moved setup to cloud
+
         """
 
         try:
@@ -178,7 +208,8 @@ class TextAlignment:
                         continue
 
                     # check for bottom right
-                    if boxes[h][3] >= boxes[t][1] >= boxes[h][1] and boxes[t][0] <= boxes[h][2] <= boxes[t][2] and boxes[t][2] >= boxes[h][2]:
+                    if boxes[h][3] >= boxes[t][1] >= boxes[h][1] and boxes[t][0] <= boxes[h][2] <= boxes[t][2] and \
+                            boxes[t][2] >= boxes[h][2]:
                         points = [boxes[t][3], boxes[t][1], boxes[h][3], boxes[t][1], boxes[t][2], boxes[t][0],
                                   boxes[h][2], boxes[t][0], boxes[h][3], boxes[h][1], boxes[h][3], boxes[t][1],
                                   boxes[h][2], boxes[h][0], boxes[t][0], boxes[h][2]]
@@ -343,3 +374,4 @@ class TextAlignment:
 
         except Exception as e:
             lg.error("Error occurred while checking for text bboxes. ", e)
+            raise SketchtocodeException(e,sys)

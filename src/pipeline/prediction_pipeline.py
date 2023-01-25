@@ -25,6 +25,18 @@ class PredictionPipeline:
         self.prediction_pipeline_config = PredictionPipelineConfig()
 
     def get_image_array(self, image_file: File):
+        """
+            Method Name :   create_text_boxes_with_html
+            Description :   This method returns a list containing prediction boxes and labels
+
+            Output      :   a list of rows and columns
+            On Failure  :   Write an exception log and then raise an exception
+
+            Version     :   1.2
+            Revisions   :   moved setup to cloud
+
+        """
+
         try:
             image = Image.open(image_file.file)
             image = np.array(image)
